@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212183728) do
+ActiveRecord::Schema.define(version: 20180213163348) do
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180212183728) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "group_id"
+    t.integer "member_type", default: 0
     t.index ["group_id"], name: "index_memberships_on_group_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
