@@ -10,4 +10,8 @@ class User < ApplicationRecord
   has_many :sent_invitations, class_name: "Invitation", foreign_key: :sender_id
   has_many :receved_invitations, class_name: "Invitation", foreign_key: :reciver_id
 
+  def self.admins(group)
+    find(group.memberships.where(member_type: "admin").pluck(:user_id))
+  end
+
 end

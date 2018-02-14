@@ -1,1 +1,8 @@
-= @group.name
+%h2
+  = @group.name
+%h3 Admins:
+- @admins.each do |admin|
+  = admin.email
+%h4 Members:
+- @members.each do |member|
+  = member.email
