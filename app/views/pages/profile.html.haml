@@ -1,0 +1,8 @@
+%h1 Hello,
+= current_user.email
+.container
+  .row
+    .col-md-6.offset-md-2
+      - @invitations.each do |invitation|
+        = invitation_handler(invitation)
+        %hr
