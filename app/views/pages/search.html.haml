@@ -17,8 +17,8 @@
           .form-group
             = form_tag({ controller: 'invitations', action: 'create' }, method: 'post') do
               = user.email
-              = select_tag 'group', options_from_collection_for_select(@user_groups, :id, :name)
+              = select_tag 'group_id', options_from_collection_for_select(@user_groups, :id, :name)
               = hidden_field_tag(:sender_id, current_user.id)
-              = hidden_field_tag(:reciver_id, user.id)
+              = hidden_field_tag(:receiver_id, user.id)
               = submit_tag "invite", name: nil, class: 'btn btn-default btn-lg btn-submit'
             %hr

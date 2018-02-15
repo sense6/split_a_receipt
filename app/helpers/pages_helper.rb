@@ -8,4 +8,5 @@ module PagesHelper
     "<br>".html_safe +
     (link_to "decline invitation", invitation_path(invitation), method: :delete)
   end
+
 end
