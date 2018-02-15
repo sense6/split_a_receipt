@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'memberships/create'
-
   get 'memberships/destroy'
 
   root to: 'pages#home'

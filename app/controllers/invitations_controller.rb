@@ -12,6 +12,8 @@ class InvitationsController < ApplicationController
   end
 
   def destroy
-
+    @invitation = Invitation.find(params[:id])
+    @invitation.destroy
+    redirect_to '/profile'
   end
 end
