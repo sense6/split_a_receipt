@@ -21,8 +21,11 @@ class InvitationsController < ApplicationController
                                    receiver_id: params[:receiver_id],
                                    group_id: params[:group_id])
 
+    @member = Membership.where(user_id: params[receiver_id],
+                               group_id: params[:group_id])
+
     respond_to do |format|
-      format.json {render :json => {invitation_exists: @invitation.present?}}
+      format.json {render :json => {invitation_exists: @invitation.present? || @member.present? }}
     end
   end
 end
