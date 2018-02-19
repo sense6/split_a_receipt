@@ -1,36 +1,39 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+toggleButton =  (id, bool) ->
+  $("#invite_button"+id).attr("disabled", bool)
+  console.log "but" + id
 
-buttonOff = (jQuery) ->
-  $('#invite_button').attr("disabled", true)
-
-buttonOn = (jQuery) ->
-  $('#invite_button').attr("disabled", false)
-
-readyFn = (jQuery) ->
-  buttonOff()
-  $("#group_id").change()
-  return
-
-$(document).ready readyFn
-
-$(document).on 'change', '#group_id', (e) ->
-  console.log @options[e.target.selectedIndex].value
+ajaxPost = (sender_id, receiver_id, group_id) ->
   $.post
       url: "/check_invitation"
       beforeSend: (xhr) ->
         xhr.setRequestHeader 'X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')
         return
       data:
-          sender_id: sender_id.value
-          receiver_id: receiver_id.value
-          group_id: group_id.value
+          sender_id: sender_id
+          receiver_id: receiver_id
+          group_id: group_id
       dataType: "json"
       success: (data) ->
-        console.log data.invitation_exists
         if data.invitation_exists
-          buttonOff()
+          toggleButton(receiver_id, true)
         else
-          buttonOn()
+          toggleButton(receiver_id, false)
   return
+
+readyFn = () ->
+  $.each $('.form-group'), (i, obj) ->
+    group_id = $(@).find('#group_id').val()
+    receiver_id = $(@).find('#receiver_id').val()
+    sender_id = $(@).find('#sender_id').val()
+
+    ajaxPost(sender_id, receiver_id, group_id)
+
+$ ->
+  readyFn
+
+$(document).on 'change', '#group_id', (e) ->
+  sender_id = $(@).parent().find('#sender_id').val()
+  receiver_id = $(@).parent().find('#receiver_id').val()
+  group_id = @options[e.target.selectedIndex].value
+
+  ajaxPost(sender_id, receiver_id, group_id)
