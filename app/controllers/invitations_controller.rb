@@ -15,4 +15,14 @@ class InvitationsController < ApplicationController
     @invitation.destroy
     redirect_to '/profile'
   end
+
+  def check_invitation
+    @invitation = Invitation.where(sender_id: params[:sender_id],
+                                   receiver_id: params[:receiver_id],
+                                   group_id: params[:group_id])
+
+    respond_to do |format|
+      format.json {render :json => {invitation_exists: @invitation.present?}}
+    end
+  end
 end
