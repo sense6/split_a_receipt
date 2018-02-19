@@ -29,7 +29,7 @@ readyFn = () ->
     ajaxPost(sender_id, receiver_id, group_id)
 
 $ ->
-  readyFn
+  readyFn()
 
 $(document).on 'change', '#group_id', (e) ->
   sender_id = $(@).parent().find('#sender_id').val()
