@@ -11,10 +11,12 @@ class MembershipsController < ApplicationController
 
   def destroy
     @membership = Membership.find_by(user_id: params[:user_id], group_id: params[:group_id])
+    group = @membership.group
     if @membership.destroy
+      group.set_admin unless group.has_admin?
       redirect_to group_path(params[:group_id])
     else
-      
+
     end
   end
 end

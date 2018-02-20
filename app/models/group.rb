@@ -4,6 +4,14 @@ class Group < ApplicationRecord
   has_many :invitations
 
   def member?(user)
-    self.members.include?(user)
+    members.include?(user)
+  end
+
+  def has_admin?
+    memberships.admin.present?
+  end
+
+  def set_admin
+    memberships.first.admin!
   end
 end
