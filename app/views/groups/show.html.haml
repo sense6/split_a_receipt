@@ -6,3 +6,6 @@
 %h4 Members:
 - @members.each do |member|
   = member.email
+%hr
+- if @group.member?(current_user)
+  = link_to 'quit group', memberships_destroy_path(user_id: current_user.id, group_id: @group.id)
