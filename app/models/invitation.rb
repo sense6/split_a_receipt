@@ -10,4 +10,10 @@ class Invitation < ApplicationRecord
       errors.add(:group_id, "cant invite same user twice")
     end
   end
+
+  def cant_invite_member_of_the_group
+    if Membership.where(user_id: receiver_id, group_id: group_id).exists?
+      errors.add(:group_id, "cant invite a member")
+    end
+  end
 end
