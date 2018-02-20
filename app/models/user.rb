@@ -14,4 +14,9 @@ class User < ApplicationRecord
     find(group.memberships.where(member_type: "admin").pluck(:user_id))
   end
 
+  def self.filter_users(search)
+    User.where("email LIKE ?","%#{search}%")
+  end
+
+
 end
