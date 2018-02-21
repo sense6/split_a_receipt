@@ -17,7 +17,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'figaro'
 gem 'simple_form'
-gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 gem "haml-rails", "~> 1.0"
 gem 'bootstrap', '~> 4.0.0'
@@ -30,6 +29,8 @@ group :development, :test do
 
   gem "factory_bot_rails"
   gem "rspec-rails"
+
+  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 end
 
 group :development do

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Group, type: :model do
   describe "associations" do
-    it { should have_many(:users).through(:memberships) }
+    it { should have_many(:members).through(:memberships) }
     it { should have_many(:memberships) }
     it { should have_many(:invitations) }
   end
