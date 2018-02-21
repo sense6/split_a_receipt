@@ -1,5 +1,5 @@
 class Invitation < ApplicationRecord
-  validate :user_cant_be_invited_to_the_same_group_twice
+  validate :user_cant_be_invited_to_the_same_group_twice, :cant_invite_member_of_the_group
 
   belongs_to :sender, class_name: "User"
   belongs_to :receiver, class_name: "User"
@@ -16,4 +16,5 @@ class Invitation < ApplicationRecord
       errors.add(:group_id, "cant invite a member")
     end
   end
+
 end
