@@ -15,7 +15,11 @@ class User < ApplicationRecord
   end
 
   def self.filter_users(search)
-    User.where("email LIKE ?","%#{search}%")
+    where("email LIKE ?","%#{search}%")
+  end
+
+  def admin?(group)
+    User.admins(group).include?(self)
   end
 
 
