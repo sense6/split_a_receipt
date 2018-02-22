@@ -22,6 +22,14 @@ class GroupsController < ApplicationController
     end
   end
 
+  def destroy
+    @group = Group.find(params[:id])
+    if @group.destroy
+      redirect_to root_path
+    else
+    end
+  end
+
   def show
     @group = Group.find(params[:id])
     @admins = User.admins(@group)
