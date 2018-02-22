@@ -13,8 +13,12 @@ class MembershipsController < ApplicationController
     @membership = Membership.find_by(user_id: params[:user_id], group_id: params[:group_id])
     group = @membership.group
     if @membership.destroy
-      group.set_admin unless group.has_admin?
-      redirect_to group_path(params[:group_id])
+      if group.members.any?
+        group.set_admin unless group.has_admin?
+        redirect_to group_path(params[:group_id])
+      else
+        redirect_to root_path
+      end
     else
 
     end
