@@ -1,11 +1,41 @@
-%h1 Hello,
-= current_user.email
+.jumbotron
+  .container
+    %h1.display-3= current_user.email
+    =link_to 'Create a group', new_group_path, class: "btn btn-primary btn-lg mt-4"
 .container
   .row
-    .col-md-6.offset-md-2
-      - @invitations.each do |invitation|
-        = invitation_handler(invitation)
-        %hr
-      - if current_user.groups.any?
-        - current_user.groups.each do |group|
-          = link_to group.name, group_path(group)
+    .col-md-4
+      .card
+        .card-block
+          %h3.card-title.text-center.my-3 Your groups:
+          - if @user_groups.any?
+            .col-md-10.offset-md-1
+              %ul.list-group
+                - @user_groups.each do |group|
+                  %li.list-group-item
+                    .row
+                      .col-md-8
+                        = link_to group.name, group_path(group)
+                      .col-md-2
+                        - if current_user.admin?(group)
+                          %span.badge.badge-pill.badge-primary Admin
+                        - else
+                          %span.badge.badge-pill.badge-primary Member
+          - else
+            =link_to 'Create a group', new_group_path, class: "btn btn-primary btn-lg mt-4"
+    .col-md-4
+      .card
+        .card-block
+          %h3.card-title.text-center.my-3 Your invitations:
+          - if @invitations.any?
+            %ul.list-group
+              - @invitations.each do |invitation|
+                %li.list-group-item
+                  To:
+                  =link_to "#{invitation.group.name}", group_path(invitation.group)
+                  =link_to "Accept", memberships_create_path(user_id: invitation.receiver_id, group_id: invitation.group.id), class: "badge badge-pill badge-success"
+                  =link_to "Decline", invitation_path(invitation), method: :delete, class: "badge badge-pill badge-danger"
+    .col-md-4
+      .card
+        .card-block
+          %h3.card-title.text-center.my-3 Your debts:

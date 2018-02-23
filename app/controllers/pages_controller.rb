@@ -9,5 +9,6 @@ class PagesController < ApplicationController
 
   def profile
     @invitations = current_user.received_invitations
+    @user_groups = current_user.groups.uniq
   end
 end

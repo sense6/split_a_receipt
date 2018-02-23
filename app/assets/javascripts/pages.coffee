@@ -1,6 +1,5 @@
 toggleButton =  (id, bool) ->
   $("#invite_button"+id).attr("disabled", bool)
-  console.log "but" + id
 
 ajaxPost = (sender_id, receiver_id, group_id) ->
   $.post
