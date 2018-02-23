@@ -1,31 +1,24 @@
-%h2 Search for users
+.jumbotron
+  .container
+    .row
+      .col-md-8.offset-md-2
+        = form_tag("/search", method: "get") do
+          .col-md-6.offset-md-3
+            %h2.text-center= label_tag(:search, "Filter users:")
+            = text_field_tag(:search, nil, class: 'form-control', value: "")
+            = submit_tag("Search", class: "btn btn-primary btn-lg btn-block")
 .container
   .row
-    .col-md-8.offset-md-2
-      = form_tag("/search", method: "get") do
-        = label_tag(:search, "Filter users:")
-        = text_field_tag(:search, nil, class: 'form-control')
-        = submit_tag("Search", class: "btn btn-primary btn-lg btn-block")
-
-  .row
-    .col-md-8.offset-md-2
-      - if @filtered_users.blank?
-        - @users.each do |user|
-          .form-group
-            = form_tag({ controller: 'invitations', action: 'create' }, method: 'post') do
-              = user.email
-              = select_tag 'group_id', options_from_collection_for_select(@user_groups, :id, :name)
-              = hidden_field_tag(:sender_id, current_user.id)
-              = hidden_field_tag(:receiver_id, user.id)
-              = submit_tag "invite", name: nil, id: "invite_button#{user.id}", class: 'btn btn-default btn-lg btn-submit'
-            %hr
-      - else
+    .col-md-6.offset-md-3
+      .list-group
         - @filtered_users.each do |user|
-          .form-group
-            = form_tag({ controller: 'invitations', action: 'create' }, method: 'post') do
-              = user.email
-              = select_tag 'group_id', options_from_collection_for_select(@user_groups, :id, :name)
+          .item-form
+            = form_tag({ controller: 'invitations', action: 'create'}, method: 'post') do
               = hidden_field_tag(:sender_id, current_user.id)
               = hidden_field_tag(:receiver_id, user.id)
-              = submit_tag "invite", name: nil, id: "invite_button#{user.id}", class: 'btn btn-default btn-lg btn-submit'
-            %hr
+              .item-mail.float-left.flex-column
+                = user.email
+              .float-right.flex-column
+                = select_tag 'group_id', options_from_collection_for_select(@user_groups, :id, :name)
+                = submit_tag "invite", name: nil, id: "invite_button#{user.id}", class: 'btn btn-default btn-submit'
+          %br

@@ -21,7 +21,7 @@ ajaxPost = (sender_id, receiver_id, group_id) ->
   return
 
 readyFn = () ->
-  $.each $('.form-group'), (i, obj) ->
+  $.each $('.item-form'), (i, obj) ->
     group_id = $(@).find('#group_id').val()
     receiver_id = $(@).find('#receiver_id').val()
     sender_id = $(@).find('#sender_id').val()

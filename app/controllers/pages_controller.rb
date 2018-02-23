@@ -3,7 +3,6 @@ class PagesController < ApplicationController
   end
 
   def search
-    @users = User.where.not(id: current_user.id)
     @filtered_users = User.filter_users(params[:search])
     @user_groups = current_user.groups.uniq
   end
