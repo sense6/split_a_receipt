@@ -1,8 +1,9 @@
 class MembershipsController < ApplicationController
   def create
     @membership = Membership.new(user_id: params[:user_id], group_id: params[:group_id])
+    @invitation = Invitation.where(receiver_id: params[:user_id], group_id: params[:group_id]).first
 
-    if @membership.save
+    if @membership.save && @invitation.destroy
       redirect_to @membership.group, notice: "joined #{@membership.group.name} group"
     else
       redirect_to '/profile', notice: 'couldnt join this group'
