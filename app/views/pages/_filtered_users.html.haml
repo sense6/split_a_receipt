@@ -1,0 +1,10 @@
+.item-form
+  = form_tag({ controller: 'invitations', action: 'create'}, method: 'post') do
+    = hidden_field_tag(:sender_id, current_user.id)
+    = hidden_field_tag(:receiver_id, user.id)
+    .item-mail.float-left.flex-column
+      = user.email
+    .float-right.flex-column
+      = select_tag 'group_id', options_from_collection_for_select(@user_groups, :id, :name)
+      = submit_tag "invite", name: nil, id: "invite_button#{user.id}", class: 'btn btn-default btn-submit'
+%br

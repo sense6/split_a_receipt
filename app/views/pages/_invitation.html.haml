@@ -1,0 +1,5 @@
+%li.list-group-item
+  To:
+  =link_to "#{invitation.group.name}", group_path(invitation.group)
+  =link_to "Accept", memberships_create_path(user_id: invitation.receiver_id, group_id: invitation.group.id), class: "badge badge-pill badge-success"
+  =link_to "Decline", invitation_path(invitation), method: :delete, class: "badge badge-pill badge-danger"

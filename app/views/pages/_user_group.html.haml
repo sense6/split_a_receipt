@@ -1,0 +1,8 @@
+.col-md-10.offset-md-1
+  %ul.list-group
+    %li.list-group-item
+      .row
+        .col-md-8
+          =link_to user_group.name, group_path(user_group)
+        .col-md-2
+          =badge_type(user_group)

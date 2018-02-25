@@ -1,0 +1,6 @@
+= form_tag("/search", method: "get") do
+  .col-md-6.offset-md-3
+    %h2.text-center= label_tag(:search, "Filter users:")
+    = text_field_tag(:search, nil, class: 'form-control', value: "")
+    %br
+    = submit_tag("Search", class: "btn btn-primary btn-lg btn-block")
