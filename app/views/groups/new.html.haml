@@ -1,14 +1,11 @@
-new
-.container
-  .row
-    .col-4
-      = simple_form_for @group do |g|
-        .form-group
-          = g.input :name, input_html: { class: 'form-control', placeholder: "Group name" }
-        .form-group
-          = g.input :description, input_html: { class: 'form-control' }
-        .form-group
-          = g.button :submit, "Submit", class: "btn btn-md btn-primary btn-block"
-    .col-8
-      %h2
-        h2
+.jumbotron
+  .container
+    .row
+      .col-md-4.offset-md-4
+        = simple_form_for @group do |g|
+          .form-group
+            = g.input :name, input_html: { class: 'form-control', placeholder: "Group name" }
+          .form-group
+            = g.input :description, as: :text, input_html: { class: 'form-control', placeholder: "Description"}
+          .form-group
+            = g.button :submit, "Create group", class: "btn btn-md btn-primary btn-block"

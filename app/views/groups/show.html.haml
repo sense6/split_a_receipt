@@ -1,39 +1,36 @@
-%main{:role => "main"}
-  .jumbotron
-    .container
-      .row
-        .col-md-6.text-center
-          %h1.display-3= @group.name
-          %p= @group.description
-          %p
-            %a.btn.btn-primary.btn-lg{:href => "#", :role => "button"} Create new bill »
-        .col-md-6
-          %h2 Admins:
-          - @admins.each do |admin|
-            %p= admin.email
-          %h3 Members:
-          %ul.members
-            - @members.each do |member|
-              %li.member= member.email
+.jumbotron
   .container
     .row
-      .col-md-4
-        %h2 bill 1
-        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+      .col-md-6.text-center
+        %h1.display-3= @group.name
+        %p= @group.description
         %p
-          %a.btn.btn-secondary{:href => "#", :role => "button"} View details »
-      .col-md-4
-        %h2 bill 2
-        %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        %p
-          %a.btn.btn-secondary{:href => "#", :role => "button"} View details »
-      .col-md-4
-        %h2 Heading
-        %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-        %p
-          %a.btn.btn-secondary{:href => "#", :role => "button"} View details »
-    %hr/
-    - if @group.member?(current_user)
-      = link_to 'quit group', memberships_destroy_path(user_id: current_user.id, group_id: @group.id), class: "btn btn-warning"
-    - if current_user.admin?(@group)
-      = link_to 'delete group', group_path(@group), method: :delete, class: "btn btn-danger"
+          %a.btn.btn-primary.btn-lg{:href => "#", :role => "button"} Create new bill »
+      .col-md-6
+        %h2 Admins:
+        =render partial: 'admin', collection: @admins
+        %h3 Members:
+        %ul.members
+          =render partial: 'member', collection: @members
+.container
+  .row
+    .col-md-4
+      %h2 bill 1
+      %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+      %p
+        %a.btn.btn-secondary{:href => "#", :role => "button"} View details »
+    .col-md-4
+      %h2 bill 2
+      %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+      %p
+        %a.btn.btn-secondary{:href => "#", :role => "button"} View details »
+    .col-md-4
+      %h2 Heading
+      %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+      %p
+        %a.btn.btn-secondary{:href => "#", :role => "button"} View details »
+  %hr/
+  - if @group.member?(current_user)
+    = link_to 'quit group', memberships_destroy_path(user_id: current_user.id, group_id: @group.id), class: "btn btn-warning"
+  - if current_user.admin?(@group)
+    = link_to 'delete group', group_path(@group), method: :delete, class: "btn btn-danger"
