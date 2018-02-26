@@ -31,8 +31,8 @@ $ ->
   readyFn()
 
 $(document).on 'change', '#group_id', (e) ->
-  sender_id = $(@).parent().find('#sender_id').val()
-  receiver_id = $(@).parent().find('#receiver_id').val()
+  sender_id = $(@).parent().parent().find('#sender_id').val()
+  receiver_id = $(@).parent().parent().find('#receiver_id').val()
   group_id = @options[e.target.selectedIndex].value
 
   ajaxPost(sender_id, receiver_id, group_id)
