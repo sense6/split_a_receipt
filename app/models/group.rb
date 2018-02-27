@@ -1,8 +1,8 @@
 class Group < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :members, through: :memberships, source: :user
-  has_many :invitations
-  has_many :posts
+  has_many :invitations, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
   def member?(user)
     members.include?(user)
