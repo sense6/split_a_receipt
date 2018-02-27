@@ -12,10 +12,13 @@ RSpec.describe InvitationsController, type: :controller do
                                       group_id: group.id } }
 
     context "creates invitation" do
-      it "returns 302" do
+      it "redirects to /search" do
         subject
         expect(response).to have_http_status(302)
         expect(subject).to redirect_to("/search")
+      end
+      it "saves invitation" do
+        expect { subject }.to change{ Invitation.count }.by(1)
       end
       it "sets success notification" do
         subject
@@ -27,10 +30,13 @@ RSpec.describe InvitationsController, type: :controller do
       subject { post :create, params: { sender_id: nil,
                                         receiver_id: user2.id,
                                         group_id: group.id } }
-      it "return 302" do
+      it "redirects to /search" do
         subject
         expect(response).to have_http_status(302)
         expect(subject).to redirect_to("/search")
+      end
+      it "doesnt save invitation" do
+        expect { subject }.to change{ Invitation.count }.by(0)
       end
       it "sets failure notification" do
         subject
@@ -43,7 +49,7 @@ RSpec.describe InvitationsController, type: :controller do
     invitation = FactoryBot.create(:invitation)
     subject { delete :destroy, params: { id: invitation.id } }
 
-    it "returns 302" do
+    it "redirects to /profile" do
       subject
       expect(response).to have_http_status(302)
       expect(subject).to redirect_to("/profile")

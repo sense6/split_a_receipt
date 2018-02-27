@@ -3,20 +3,20 @@ toggleButton =  (id, bool) ->
 
 ajaxPost = (sender_id, receiver_id, group_id) ->
   $.post
-      url: "/check_invitation"
-      beforeSend: (xhr) ->
-        xhr.setRequestHeader 'X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')
-        return
-      data:
-          sender_id: sender_id
-          receiver_id: receiver_id
-          group_id: group_id
-      dataType: "json"
-      success: (data) ->
-        if data.invitation_exists
-          toggleButton(receiver_id, true)
-        else
-          toggleButton(receiver_id, false)
+    url: "/check_invitation"
+    beforeSend: (xhr) ->
+      xhr.setRequestHeader 'X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')
+      return
+    data:
+        sender_id: sender_id
+        receiver_id: receiver_id
+        group_id: group_id
+    dataType: "json"
+    success: (data) ->
+      if data.invitation_exists
+        toggleButton(receiver_id, true)
+      else
+        toggleButton(receiver_id, false)
   return
 
 readyFn = () ->

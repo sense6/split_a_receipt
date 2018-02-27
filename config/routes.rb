@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :groups
+  resources :groups do
+    resources :posts, only: [:create]
+  end
   resources :invitations, only: [:create, :destroy]
 end
