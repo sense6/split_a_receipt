@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'figaro'
 gem 'simple_form'
+gem 'cancancan', '~> 2.0'
 
 gem "haml-rails", "~> 1.0"
 gem 'bootstrap', '~> 4.0.0'

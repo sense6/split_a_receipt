@@ -32,8 +32,10 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    authorize! :read, @group
     @admins = User.admins(@group)
     @members = @group.members - @admins
+    @posts = @group.posts.order(created_at: :desc)
   end
 
   private
