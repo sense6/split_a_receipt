@@ -1,2 +1,5 @@
-%h1= post.title
-%h2= post.body
+.card
+  .card-header.bg-info.text-white= post.title
+  .card-body= post.body
+  .footer-card.card-footer.text-center= post.created_at
+%br
