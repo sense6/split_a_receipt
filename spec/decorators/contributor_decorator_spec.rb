@@ -11,6 +11,6 @@ RSpec.describe ContributorDecorator do
   end
 
   describe "debt_with_currency" do
-    it { expect(decorated_contributor.debt_with_currency).to eq("owes: 10.0 EUR") }
+    it { expect(decorated_contributor.debt_with_currency).to eq("10.0 EUR") }
   end
 end
