@@ -36,6 +36,7 @@ class GroupsController < ApplicationController
     @admins = User.admins(@group)
     @members = @group.members - @admins
     @posts = @group.posts.order(created_at: :desc)
+    @receipts = @group.receipts
   end
 
   private

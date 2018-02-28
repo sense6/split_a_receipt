@@ -1,0 +1,12 @@
+form
+= simple_form_for([@group, @receipt]) do |f|
+  .form-group
+    = f.input :name, input_html: { class: 'form-control', placeholder: "Name" }
+  .form-group
+    = f.input :currency, collection: @currencies, input_html: { class: 'form-control', placeholder: "Name" }
+  .form-group
+    = f.input :amount, input_html: { class: 'form-control' }
+  .form-group
+    = f.input :contributors, as: :check_boxes, collection: @contributors, label_method: :second, value_method: :first
+  .form-group
+    = f.button :submit

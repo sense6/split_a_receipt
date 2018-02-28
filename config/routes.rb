@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :groups do
     resources :posts, only: [:create]
+    resources :receipts
   end
   resources :invitations, only: [:create, :destroy]
 end
