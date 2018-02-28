@@ -6,5 +6,8 @@
 .container
   .row
     .col-md-6.offset-md-3
-      .list-group
-        =render partial: "filtered_users", collection: @filtered_users, as: :user
+      .digg_pagination
+        =will_paginate @filtered_users
+        %br
+        .list-group
+          =render partial: "filtered_users", collection: @filtered_users, as: :user

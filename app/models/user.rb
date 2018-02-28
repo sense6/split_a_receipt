@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :posts
   has_many :contributors
 
+  self.per_page = 10
+
   def self.admins(group)
     find(group.memberships.where(member_type: "admin").pluck(:user_id))
   end
