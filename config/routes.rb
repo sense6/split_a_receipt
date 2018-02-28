@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'memberships/create'
   get 'memberships/destroy'
 
-  root to: 'pages#home'
+  root to: 'pages#profile'
   get '/search', to: 'pages#search'
   get '/profile', to: 'pages#profile'
 

@@ -1,7 +1,4 @@
 class PagesController < ApplicationController
-  def home
-  end
-
   def search
     @filtered_users = User.filter_users(params[:search]).paginate(:page => params[:page])
     @user_groups = current_user.groups.uniq
