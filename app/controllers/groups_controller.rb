@@ -35,8 +35,8 @@ class GroupsController < ApplicationController
     authorize! :read, @group
     @admins = User.admins(@group)
     @members = @group.members - @admins
-    @posts = @group.posts.order(created_at: :desc)
-    @receipts = @group.receipts
+    @posts = @group.posts.order(created_at: :desc).decorate
+    @receipts = @group.receipts.decorate
   end
 
   private
