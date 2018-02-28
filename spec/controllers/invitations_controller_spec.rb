@@ -10,7 +10,7 @@ RSpec.describe InvitationsController, type: :controller do
     subject { post :create, params: { sender_id: user1.id,
                                       receiver_id: user2.id,
                                       group_id: group.id } }
-
+                            
     context "creates invitation" do
       it "redirects to /search" do
         subject
