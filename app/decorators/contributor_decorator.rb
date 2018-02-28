@@ -6,6 +6,6 @@ class ContributorDecorator < Draper::Decorator
   end
 
   def debt_with_currency
-    "owes: #{object.debt} #{object.receipt.currency}"
+    "#{object.debt} #{object.receipt.currency}"
   end
 end

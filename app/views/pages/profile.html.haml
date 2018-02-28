@@ -19,3 +19,5 @@
       .card
         .card-block
           %h3.card-title.text-center.my-3 Your debts:
+          %ul.list-group
+            =render partial: "debt", collection: @debts
